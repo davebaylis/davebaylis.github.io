@@ -1,0 +1,759 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Dave Baylis — Author</title>
+  <meta name="description" content="Dave Baylis — fiction writer. Debut novel The Emperor of the Desert coming soon.">
+  <meta name="author" content="Dave Baylis">
+  <meta property="og:title" content="Dave Baylis — Author">
+  <meta property="og:description" content="Fiction writer. Debut novel The Emperor of the Desert coming soon.">
+  <meta property="og:image" content="https://davebaylis.com/discopistol.png">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://davebaylis.com">
+
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-P9EH47TH9Q"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-P9EH47TH9Q');
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=DM+Sans:wght@300;400&display=swap" rel="stylesheet">
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      /* Desaturated purple palette */
+      --deep:       #1e1a2e;   /* darkest — page bg */
+      --plum:       #2d2740;   /* section bg */
+      --dusk:       #3d3558;   /* card bg */
+      --slate:      #5e5478;   /* muted purple-grey */
+      --lilac:      #9b91b5;   /* secondary text */
+      --mist:       #c8c0d8;   /* primary text */
+      --parchment:  #e8e2d4;   /* headings / warm highlight */
+      --stone:      #b5a98a;   /* warm accent */
+      --terracotta: #8a4f3a;   /* rust CTA */
+      --terra-mid:  #a4614a;   /* rust hover */
+
+      --serif: 'Cormorant Garamond', Georgia, serif;
+      --sans:  'DM Sans', sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--deep);
+      color: var(--mist);
+      font-family: var(--sans);
+      font-size: 16px;
+      line-height: 1.75;
+      overflow-x: hidden;
+    }
+
+    /* Subtle grain overlay */
+    body::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.72' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.05'/%3E%3C/svg%3E");
+      opacity: 0.35;
+      pointer-events: none;
+      z-index: 9999;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.6rem 3.5rem;
+    }
+
+    .nav-logo {
+      font-family: var(--serif);
+      font-size: 1.15rem;
+      font-style: italic;
+      font-weight: 400;
+      color: var(--parchment);
+      text-decoration: none;
+      letter-spacing: 0.02em;
+    }
+
+    .nav-links {
+      list-style: none;
+      display: flex;
+      gap: 2.5rem;
+    }
+
+    .nav-links a {
+      font-family: var(--sans);
+      font-size: 0.68rem;
+      font-weight: 300;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: var(--parchment);
+      text-decoration: none;
+      opacity: 0.6;
+      transition: opacity 0.2s;
+    }
+
+    .nav-links a:hover { opacity: 1; }
+
+    /* ── HERO ── */
+    .hero {
+      position: relative;
+      width: 100%;
+      overflow: hidden;
+    }
+
+    /* The skyline image */
+    .hero-image {
+      width: 100%;
+      display: block;
+      /* Desaturate and darken slightly to sophisticate the palette */
+      filter: saturate(0.55) brightness(0.75) contrast(1.05);
+      /* Slight purple tint via mix-blend-mode on overlay below */
+    }
+
+    /* Purple tint overlay on top of image */
+    .hero-tint {
+      position: absolute;
+      inset: 0;
+      background: rgba(30, 22, 52, 0.35);
+      mix-blend-mode: multiply;
+      pointer-events: none;
+    }
+
+    /* Gradient fade at bottom so hero bleeds into page */
+    .hero-fade {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 55%;
+      background: linear-gradient(to top, var(--deep) 0%, rgba(30,26,46,0.85) 45%, transparent 100%);
+      pointer-events: none;
+    }
+
+    /* Name + tagline over hero */
+    .hero-caption {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      padding: 0 3.5rem 3.5rem;
+    }
+
+    .hero-kicker {
+      font-family: var(--sans);
+      font-size: 0.62rem;
+      font-weight: 300;
+      letter-spacing: 0.42em;
+      text-transform: uppercase;
+      color: var(--stone);
+      margin-bottom: 0.7rem;
+    }
+
+    .hero-name {
+      font-family: var(--serif);
+      font-size: clamp(3.2rem, 7.5vw, 7.5rem);
+      font-weight: 600;
+      line-height: 0.88;
+      letter-spacing: -0.015em;
+      color: var(--parchment);
+      margin-bottom: 1.1rem;
+    }
+
+    .hero-tagline {
+      font-family: var(--serif);
+      font-size: clamp(1rem, 1.8vw, 1.3rem);
+      font-style: italic;
+      font-weight: 300;
+      color: var(--mist);
+      opacity: 0.8;
+      max-width: 48ch;
+      line-height: 1.55;
+      margin-bottom: 2.2rem;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    /* ── BUTTONS ── */
+    .btn-primary {
+      font-family: var(--sans);
+      font-size: 0.65rem;
+      font-weight: 400;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--parchment);
+      background: var(--terracotta);
+      border: 1px solid var(--terracotta);
+      padding: 0.82rem 1.9rem;
+      text-decoration: none;
+      display: inline-block;
+      transition: background 0.25s, border-color 0.25s;
+    }
+
+    .btn-primary:hover { background: var(--terra-mid); border-color: var(--terra-mid); }
+
+    .btn-ghost {
+      font-family: var(--sans);
+      font-size: 0.65rem;
+      font-weight: 300;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--mist);
+      border: 1px solid rgba(200,192,216,0.28);
+      padding: 0.82rem 1.9rem;
+      text-decoration: none;
+      display: inline-block;
+      transition: border-color 0.25s, color 0.25s;
+    }
+
+    .btn-ghost:hover { border-color: var(--mist); color: var(--parchment); }
+
+    /* ── DIVIDER ── */
+    .divider {
+      height: 1px;
+      background: linear-gradient(to right, transparent, rgba(155,145,181,0.15), transparent);
+    }
+
+    /* ── SECTION ── */
+    .section {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 6rem 3.5rem;
+    }
+
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 1.2rem;
+      margin-bottom: 3.5rem;
+    }
+
+    .section-header::before {
+      content: '';
+      display: block;
+      width: 2.5rem;
+      height: 1px;
+      background: var(--stone);
+      flex-shrink: 0;
+    }
+
+    .section-label {
+      font-family: var(--sans);
+      font-size: 0.62rem;
+      font-weight: 300;
+      letter-spacing: 0.4em;
+      text-transform: uppercase;
+      color: var(--stone);
+    }
+
+    /* ── ABOUT ── */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 255px 1fr;
+      gap: 5rem;
+      align-items: start;
+    }
+
+    .about-photo {
+      position: relative;
+    }
+
+    .about-photo img {
+      width: 100%;
+      display: block;
+      filter: saturate(0.3) contrast(1.05) brightness(0.88);
+      border: 1px solid rgba(155,145,181,0.12);
+    }
+
+    /* Corner accents in stone colour */
+    .about-photo::before {
+      content: '';
+      position: absolute;
+      top: -8px; left: -8px;
+      width: 34px; height: 34px;
+      border-top: 1.5px solid var(--stone);
+      border-left: 1.5px solid var(--stone);
+    }
+
+    .about-photo::after {
+      content: '';
+      position: absolute;
+      bottom: -8px; right: -8px;
+      width: 34px; height: 34px;
+      border-bottom: 1.5px solid var(--stone);
+      border-right: 1.5px solid var(--stone);
+    }
+
+    .about-content h2 {
+      font-family: var(--serif);
+      font-size: 2.1rem;
+      font-weight: 400;
+      font-style: italic;
+      line-height: 1.2;
+      color: var(--parchment);
+      margin-bottom: 1.5rem;
+    }
+
+    .about-content p {
+      font-size: 1rem;
+      font-weight: 300;
+      color: var(--lilac);
+      line-height: 1.88;
+      max-width: 58ch;
+    }
+
+    .about-content p em { font-style: italic; color: var(--mist); }
+    .about-content p + p { margin-top: 1.1rem; }
+
+    .contact-line {
+      margin-top: 2rem;
+      font-size: 0.78rem;
+      font-family: var(--sans);
+      letter-spacing: 0.05em;
+      color: var(--slate);
+    }
+
+    .contact-line a {
+      color: var(--lilac);
+      text-decoration: none;
+      border-bottom: 1px solid rgba(155,145,181,0.25);
+      padding-bottom: 1px;
+      transition: color 0.2s, border-color 0.2s;
+    }
+
+    .contact-line a:hover { color: var(--mist); border-color: var(--lilac); }
+
+    /* ── WORKS ── */
+    .works-bg { background: var(--plum); }
+
+    .works-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 2px;
+    }
+
+    .work-card {
+      background: var(--dusk);
+      transition: background 0.3s;
+    }
+
+    .work-card:hover { background: #453c62; }
+
+    .work-card-inner {
+      display: flex;
+      gap: 1.8rem;
+      padding: 2.2rem;
+      align-items: flex-start;
+    }
+
+    .work-cover {
+      width: 88px;
+      flex-shrink: 0;
+      position: relative;
+    }
+
+    .work-cover img {
+      width: 100%;
+      display: block;
+      filter: saturate(0.4) contrast(1.05) brightness(0.85);
+      border: 1px solid rgba(155,145,181,0.15);
+    }
+
+    .work-card.featured .work-cover::before {
+      content: 'Debut';
+      position: absolute;
+      top: -6px; left: -6px;
+      font-family: var(--sans);
+      font-size: 0.5rem;
+      font-weight: 400;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      background: var(--terracotta);
+      color: var(--parchment);
+      padding: 3px 7px;
+    }
+
+    .work-cover-placeholder {
+      width: 88px;
+      flex-shrink: 0;
+      aspect-ratio: 2/3;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(155,145,181,0.12);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .work-cover-placeholder span {
+      font-family: var(--sans);
+      font-size: 0.52rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--slate);
+      text-align: center;
+      padding: 0.5rem;
+      line-height: 1.5;
+    }
+
+    .work-info { flex: 1; }
+
+    .work-status {
+      font-family: var(--sans);
+      font-size: 0.56rem;
+      font-weight: 300;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--stone);
+      margin-bottom: 0.4rem;
+    }
+
+    .work-title {
+      font-family: var(--serif);
+      font-size: 1.15rem;
+      font-style: italic;
+      font-weight: 400;
+      color: var(--parchment);
+      line-height: 1.2;
+      margin-bottom: 0.4rem;
+    }
+
+    .work-type {
+      font-family: var(--sans);
+      font-size: 0.6rem;
+      font-weight: 300;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--slate);
+      margin-bottom: 0.75rem;
+    }
+
+    .work-synopsis {
+      font-size: 0.87rem;
+      font-weight: 300;
+      color: var(--lilac);
+      line-height: 1.65;
+    }
+
+    .work-card.placeholder { opacity: 0.38; }
+    .work-card.placeholder:hover { background: var(--dusk); }
+
+    /* ── MAILING LIST ── */
+    .list-section {
+      text-align: center;
+      padding: 7rem 3rem;
+      position: relative;
+      background: var(--deep);
+    }
+
+    .list-section::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at center, rgba(93,75,130,0.18) 0%, transparent 68%);
+      pointer-events: none;
+    }
+
+    .list-inner {
+      max-width: 500px;
+      margin: 0 auto;
+      position: relative;
+    }
+
+    .list-inner .section-header {
+      justify-content: center;
+      margin-bottom: 1.8rem;
+    }
+
+    .list-inner .section-header::before { display: none; }
+
+    .list-inner h2 {
+      font-family: var(--serif);
+      font-size: clamp(1.9rem, 4vw, 3rem);
+      font-weight: 400;
+      font-style: italic;
+      line-height: 1.15;
+      color: var(--parchment);
+      margin-bottom: 0.9rem;
+    }
+
+    .list-inner > p {
+      font-size: 0.93rem;
+      font-weight: 300;
+      color: var(--lilac);
+      margin-bottom: 2.4rem;
+    }
+
+    .email-form {
+      display: flex;
+      max-width: 420px;
+      margin: 0 auto 1rem;
+    }
+
+    .email-form input[type="email"] {
+      flex: 1;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(155,145,181,0.22);
+      border-right: none;
+      color: var(--parchment);
+      font-family: var(--sans);
+      font-size: 0.82rem;
+      font-weight: 300;
+      padding: 0.82rem 1rem;
+      outline: none;
+      transition: border-color 0.2s;
+      -webkit-appearance: none;
+    }
+
+    .email-form input[type="email"]::placeholder { color: var(--lilac); opacity: 0.45; }
+    .email-form input[type="email"]:focus { border-color: rgba(155,145,181,0.5); }
+
+    .email-form button {
+      background: var(--terracotta);
+      border: 1px solid var(--terracotta);
+      color: var(--parchment);
+      font-family: var(--sans);
+      font-size: 0.62rem;
+      font-weight: 400;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      padding: 0.82rem 1.5rem;
+      cursor: pointer;
+      transition: background 0.2s;
+      white-space: nowrap;
+    }
+
+    .email-form button:hover { background: var(--terra-mid); }
+
+    .form-note {
+      font-family: var(--sans);
+      font-size: 0.6rem;
+      letter-spacing: 0.1em;
+      color: var(--slate);
+      opacity: 0.6;
+    }
+
+    #form-success {
+      display: none;
+      font-family: var(--sans);
+      font-size: 0.7rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--lilac);
+      padding: 1rem 0;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      border-top: 1px solid rgba(155,145,181,0.1);
+      padding: 1.8rem 3.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    footer p, footer a {
+      font-family: var(--sans);
+      font-size: 0.6rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--slate);
+      opacity: 0.6;
+      text-decoration: none;
+      transition: opacity 0.2s;
+    }
+
+    footer a:hover { opacity: 1; }
+
+    /* ── FADE IN ── */
+    .fade {
+      opacity: 0;
+      transform: translateY(16px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+
+    .fade.visible { opacity: 1; transform: none; }
+    .fade.d1 { transition-delay: 0.1s; }
+    .fade.d2 { transition-delay: 0.2s; }
+    .fade.d3 { transition-delay: 0.3s; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 780px) {
+      nav { padding: 1.1rem 1.5rem; }
+      .nav-links { display: none; }
+      .hero-caption { padding: 0 1.5rem 2.5rem; }
+      .section { padding: 4rem 1.5rem; }
+      .about-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+      .about-photo { max-width: 200px; }
+      .email-form { flex-direction: column; }
+      .email-form input[type="email"] {
+        border-right: 1px solid rgba(155,145,181,0.22);
+        border-bottom: none;
+      }
+      footer { flex-direction: column; gap: 0.7rem; padding: 1.5rem; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="#" class="nav-logo">Dave Baylis</a>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#works">Works</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <div class="hero">
+    <img class="hero-image"
+         src="1774001711596_image.png"
+         alt="Las Vegas skyline at dusk">
+    <div class="hero-tint"></div>
+    <div class="hero-fade"></div>
+    <div class="hero-caption">
+      <p class="hero-kicker">Fiction Writer</p>
+      <h1 class="hero-name">Dave Baylis</h1>
+      <p class="hero-tagline">Replace this with a line about your writing — your territory, your obsessions, what makes your voice unmistakably yours.</p>
+      <div class="hero-actions">
+        <a href="#works" class="btn-primary">See the work</a>
+        <a href="#contact" class="btn-ghost">Stay in touch</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- ABOUT -->
+  <section class="section" id="about">
+    <div class="section-header">
+      <span class="section-label">About</span>
+    </div>
+    <div class="about-grid fade">
+      <div class="about-photo">
+        <img src="discopistol.png" alt="Dave Baylis — author photo placeholder">
+      </div>
+      <div class="about-content">
+        <h2>Replace this with a line that sounds like you.</h2>
+        <p>This is your author bio — where you're from, what brought you to writing, what you care about on the page. Two or three paragraphs is plenty. Enough to make someone feel they know you a little before they read a word of the book.</p>
+        <p>You don't need credentials. You need to sound like yourself. Keep it honest. Keep it a little strange. You're writing <em>The Emperor of the Desert</em> — that already tells people something.</p>
+        <p class="contact-line">Get in touch: <a href="mailto:author@davebaylis.com">author@davebaylis.com</a></p>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- WORKS -->
+  <div class="works-bg" id="works">
+    <div class="section" style="padding-bottom: 2.5rem;">
+      <div class="section-header">
+        <span class="section-label">Works</span>
+      </div>
+    </div>
+    <div class="works-grid">
+
+      <div class="work-card featured fade">
+        <div class="work-card-inner">
+          <div class="work-cover">
+            <img src="discopistol.png" alt="The Emperor of the Desert cover">
+          </div>
+          <div class="work-info">
+            <p class="work-status">Coming soon</p>
+            <h3 class="work-title">The Emperor of the Desert</h3>
+            <p class="work-type">Novel</p>
+            <p class="work-synopsis">Replace with your one- or two-sentence hook. Atmospheric, specific, impossible to shake.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="work-card fade d1">
+        <div class="work-card-inner">
+          <div class="work-cover-placeholder">
+            <span>Cover<br>TBC</span>
+          </div>
+          <div class="work-info">
+            <p class="work-status">In progress</p>
+            <h3 class="work-title">Project Title</h3>
+            <p class="work-type">Novel · Short story · Essay</p>
+            <p class="work-synopsis">A line or two about this project. Replace with whatever you're working on or have planned.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="work-card placeholder fade d2">
+        <div class="work-card-inner">
+          <div class="work-cover-placeholder">
+            <span>Add or<br>remove</span>
+          </div>
+          <div class="work-info">
+            <p class="work-status">Forthcoming</p>
+            <h3 class="work-title">Another Project</h3>
+            <p class="work-type">Duplicate this card as needed</p>
+            <p class="work-synopsis">The grid fills automatically. Add as many cards as you have projects, or delete this one.</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- CONTACT + MAILING LIST -->
+  <div class="list-section" id="contact">
+    <div class="list-inner">
+      <div class="section-header" style="justify-content:center; margin-bottom:1.8rem;">
+        <span class="section-label">Stay close</span>
+      </div>
+      <h2 class="fade">Publication news.<br>Nothing you didn't ask for.</h2>
+      <p class="fade d1">New work, events, and occasional dispatches. Infrequent and worth reading.</p>
+      <form class="email-form fade d2" id="signup-form" onsubmit="handleSignup(event)">
+        <input type="email" name="email" placeholder="your@email.com" required autocomplete="email">
+        <button type="submit">Subscribe</button>
+      </form>
+      <p class="form-note fade d3">No spam. Unsubscribe any time.</p>
+      <div id="form-success">You're on the list — thank you.</div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>© 2025 Dave Baylis</p>
+    <a href="mailto:author@davebaylis.com">author@davebaylis.com</a>
+  </footer>
+
+  <script>
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+    }, { threshold: 0.1, rootMargin: '0px 0px -30px 0px' });
+    document.querySelectorAll('.fade').forEach(el => observer.observe(el));
+
+    function handleSignup(e) {
+      e.preventDefault();
+      const email = e.target.querySelector('input[type="email"]').value;
+      // ── PLUG IN YOUR MAILING LIST ENDPOINT HERE ──
+      console.log('Signup:', email);
+      document.getElementById('signup-form').style.display = 'none';
+      document.getElementById('form-success').style.display = 'block';
+      if (typeof gtag !== 'undefined') {
+        gtag('event', 'sign_up', { method: 'email_form' });
+      }
+    }
+  </script>
+
+</body>
+</html>
