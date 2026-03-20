@@ -111,18 +111,16 @@
     .hero {
       position: relative;
       width: 100%;
-      height: 35vh;
       overflow: hidden;
     }
 
     /* The skyline image */
     .hero-image {
       width: 100%;
-      height: 100%;
       display: block;
-      object-fit: cover;
-      object-position: center 40%;
+      /* Desaturate and darken slightly to sophisticate the palette */
       filter: saturate(0.55) brightness(0.75) contrast(1.05);
+      /* Slight purple tint via mix-blend-mode on overlay below */
     }
 
     /* Purple tint overlay on top of image */
@@ -622,7 +620,7 @@
   <!-- HERO -->
   <div class="hero">
     <img class="hero-image"
-         src="Vegas_Skyline,jpg"
+         src="1774001711596_image.png"
          alt="Las Vegas skyline at dusk">
     <div class="hero-tint"></div>
     <div class="hero-fade"></div>
@@ -652,7 +650,7 @@
         <h2>Replace this with a line that sounds like you.</h2>
         <p>This is your author bio — where you're from, what brought you to writing, what you care about on the page. Two or three paragraphs is plenty. Enough to make someone feel they know you a little before they read a word of the book.</p>
         <p>You don't need credentials. You need to sound like yourself. Keep it honest. Keep it a little strange. You're writing <em>The Emperor of the Desert</em> — that already tells people something.</p>
-        <p class="contact-line">Get in touch: <a href="/cdn-cgi/l/email-protection#5c3d292834332e1c383d2a393e3d2530352f723f3331"><span class="__cf_email__" data-cfemail="9effebeaf6f1ecdefaffe8fbfcffe7f2f7edb0fdf1f3">[email&#160;protected]</span></a></p>
+        <p class="contact-line">Get in touch: <a href="mailto:author@davebaylis.com">author@davebaylis.com</a></p>
       </div>
     </div>
   </section>
@@ -735,10 +733,10 @@
   <!-- FOOTER -->
   <footer>
     <p>© 2025 Dave Baylis</p>
-    <a href="/cdn-cgi/l/email-protection#11706465797e6351757067747370687d78623f727e7c"><span class="__cf_email__" data-cfemail="c2a3b7b6aaadb082a6a3b4a7a0a3bbaeabb1eca1adaf">[email&#160;protected]</span></a>
+    <a href="mailto:author@davebaylis.com">author@davebaylis.com</a>
   </footer>
 
-  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+  <script>
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
     }, { threshold: 0.1, rootMargin: '0px 0px -30px 0px' });
@@ -746,4 +744,16 @@
 
     function handleSignup(e) {
       e.preventDefault();
-      const email = e.target.querySelector('input[type="email"]').value
+      const email = e.target.querySelector('input[type="email"]').value;
+      // ── PLUG IN YOUR MAILING LIST ENDPOINT HERE ──
+      console.log('Signup:', email);
+      document.getElementById('signup-form').style.display = 'none';
+      document.getElementById('form-success').style.display = 'block';
+      if (typeof gtag !== 'undefined') {
+        gtag('event', 'sign_up', { method: 'email_form' });
+      }
+    }
+  </script>
+
+</body>
+</html>
