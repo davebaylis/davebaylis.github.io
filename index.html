@@ -352,10 +352,14 @@
       padding: 2.2rem;
     }
 
-    .work-cover {
+    .work-cover,
+    .work-cover-placeholder {
       width: 100%;
-      min-width: 88px;
-      flex-shrink: 0;
+      height: 240px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(0,0,0,0.15);
       position: relative;
     }
     
@@ -385,12 +389,22 @@
 
     .work-cover-placeholder {
       width: 100%;
-      height: 320px;
-      background: rgba(255,255,255,0.04);
-      border: 1px solid rgba(155,145,181,0.12);
+      height: 240px;
       display: flex;
       align-items: center;
       justify-content: center;
+      background: rgba(0,0,0,0.15);
+      position: relative;
+    }
+    
+    .work-cover-placeholder img {
+      width: 160px;
+      height: 240px;
+      object-fit: contain;
+      object-position: center;
+      display: block;
+      filter: saturate(0.4) contrast(1.05) brightness(0.85);
+      border: 1px solid rgba(155,145,181,0.15);
     }
 
     .work-cover-placeholder span {
