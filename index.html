@@ -354,20 +354,20 @@
 
     .work-cover {
       width: 100%;
-      min-width: 88px;
       flex-shrink: 0;
       position: relative;
     }
 
     .work-cover img {
       width: 100%;
-      max-height: 200px;
-      object-fit: cover;
-      object-position: center top;
+      height: 320px;
+      object-fit: contain;
+      object-position: center;
+      background: rgba(0,0,0,0.15);
       display: block;
       filter: saturate(0.4) contrast(1.05) brightness(0.85);
       border: 1px solid rgba(155,145,181,0.15);
-    }    
+    }
 
     .work-card.featured .work-cover::before {
       content: 'Debut';
@@ -384,14 +384,24 @@
     }
 
     .work-cover-placeholder {
-      width: 88px;
-      flex-shrink: 0;
-      aspect-ratio: 2/3;
+      width: 100%;
+      height: 320px;
       background: rgba(255,255,255,0.04);
       border: 1px solid rgba(155,145,181,0.12);
       display: flex;
       align-items: center;
       justify-content: center;
+    }
+
+    .work-cover-placeholder img {
+      width: 100%;
+      height: 320px;
+      object-fit: contain;
+      object-position: center;
+      background: rgba(0,0,0,0.15);
+      display: block;
+      filter: saturate(0.4) contrast(1.05) brightness(0.85);
+      border: 1px solid rgba(155,145,181,0.15);
     }
 
     .work-cover-placeholder span {
@@ -746,15 +756,4 @@
 
     function handleSignup(e) {
       e.preventDefault();
-      const email = e.target.querySelector('input[type="email"]').value;
-      console.log('Signup:', email);
-      document.getElementById('signup-form').style.display = 'none';
-      document.getElementById('form-success').style.display = 'block';
-      if (typeof gtag !== 'undefined') {
-        gtag('event', 'sign_up', { method: 'email_form' });
-      }
-    }
-  </script>
-
-</body>
-</html>
+      co
