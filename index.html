@@ -738,12 +738,12 @@
       </div>
       <h2 class="fade">Publication news.<br>Nothing you didn't ask for.</h2>
       <p class="fade d1">New work, events, and occasional dispatches. Infrequent and worth reading.</p>
-      <a href="https://davebaylis.substack.com/subscribe" 
-         target="_blank" 
-         class="btn-primary fade d2">
-        Subscribe for free
-        </a>
+      <form class="email-form fade d2" id="signup-form" onsubmit="handleSignup(event)">
+        <input type="email" name="email" id="bd-email" placeholder="your@email.com" required autocomplete="email">
+        <button type="submit">Subscribe</button>
+      </form>
       <p class="form-note fade d3">No spam. Unsubscribe any time.</p>
+      <div id="form-success">You're on the list — thank you.</div>
     </div>
   </div>
 
@@ -761,13 +761,18 @@
 
     function handleSignup(e) {
       e.preventDefault();
-      const email = e.target.querySelector('input[type="email"]').value;
-      console.log('Signup:', email);
-      document.getElementById('signup-form').style.display = 'none';
-      document.getElementById('form-success').style.display = 'block';
-      if (typeof gtag !== 'undefined') {
-        gtag('event', 'sign_up', { method: 'email_form' });
-      }
+      const email = document.getElementById('bd-email').value;
+      fetch('https://buttondown.com/api/emails/embed-subscribe/davebaylis', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: `email=${encodeURIComponent(email)}`
+      }).then(() => {
+        document.getElementById('signup-form').style.display = 'none';
+        document.getElementById('form-success').style.display = 'block';
+        if (typeof gtag !== 'undefined') {
+          gtag('event', 'sign_up', { method: 'email_form' });
+        }
+      });
     }
   </script>
 
