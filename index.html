@@ -30,8 +30,6 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=DM+Sans:wght@300;400&display=swap" rel="stylesheet">
 
-  <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
-
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -565,24 +563,6 @@
       opacity: 0.6;
     }
 
-    #form-success {
-      display: none;
-      font-family: var(--sans);
-      font-size: 0.7rem;
-      letter-spacing: 0.25em;
-      text-transform: uppercase;
-      color: var(--lilac);
-      padding: 1rem 0;
-    }
-
-    #form-error {
-      display: none;
-      font-family: var(--sans);
-      font-size: 0.78rem;
-      color: var(--stone);
-      padding: 0.75rem 0;
-    }
-
     /* ── FOOTER ── */
     footer {
       border-top: 1px solid rgba(155,145,181,0.1);
@@ -755,17 +735,14 @@
       </div>
       <h2 class="fade">Join the newsletter for a free Cal Chance story.</h2>
       <p class="fade d1">Infrequent. Worth reading. No spam.</p>
-      <form id="signup-form" onsubmit="handleSignup(event)">
-        <div class="email-form fade d2">
-          <input type="email" name="email" id="bd-email" placeholder="your@email.com" required autocomplete="email">
-          <input type="hidden" name="embed" value="1">
-          <button type="submit">Subscribe</button>
-        </div>
-        <div class="cf-turnstile" data-sitekey="0x4AAAAAABrWC8POBFndQnsz" style="margin: 0.9rem auto 0; display:flex; justify-content:center;"></div>
+      <form class="email-form fade d2" id="signup-form"
+            action="https://buttondown.com/api/emails/embed-subscribe/davebaylis"
+            method="post">
+        <input type="email" name="email" id="bd-email" placeholder="your@email.com" required autocomplete="email">
+        <input type="hidden" name="embed" value="1">
+        <button type="submit">Subscribe</button>
       </form>
       <p class="form-note fade d3">No spam. Unsubscribe any time.</p>
-      <div id="form-success">Thanks for subscribing.</div>
-      <div id="form-error">Something went wrong — please try again.</div>
     </div>
   </div>
 
@@ -780,29 +757,6 @@
       entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
     }, { threshold: 0.1, rootMargin: '0px 0px -30px 0px' });
     document.querySelectorAll('.fade').forEach(el => observer.observe(el));
-
-    function handleSignup(e) {
-      e.preventDefault();
-      const form = document.getElementById('signup-form');
-      const formData = new FormData(form);
-
-      fetch('https://buttondown.com/api/emails/embed-subscribe/davebaylis', {
-        method: 'POST',
-        body: formData
-      }).then(response => {
-        if (response.ok) {
-          form.style.display = 'none';
-          document.getElementById('form-success').style.display = 'block';
-          if (typeof gtag !== 'undefined') {
-            gtag('event', 'sign_up', { method: 'email_form' });
-          }
-        } else {
-          document.getElementById('form-error').style.display = 'block';
-        }
-      }).catch(() => {
-        document.getElementById('form-error').style.display = 'block';
-      });
-    }
   </script>
 
 </body>
