@@ -4,10 +4,10 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Dave Baylis — Author</title>
-  <meta name="description" content="Dave Baylis — fiction writer. Debut novella The Man with the Blue Suede Shoes Out Now.">
+  <meta name="description" content="Dave Baylis — fiction writer. Debut novella The Man with the Blue Suede Shoes coming soon.">
   <meta name="author" content="Dave Baylis">
   <meta property="og:title" content="Dave Baylis — Author">
-  <meta property="og:description" content="Fiction writer. Debut novella The Man with the Blue Suede Shoes Out Now.">
+  <meta property="og:description" content="Fiction writer. Debut novella The Man with the Blue Suede Shoes coming soon.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://davebaylis.com/">
    
@@ -16,7 +16,7 @@
   
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Dave Baylis — Author">
-  <meta name="twitter:description" content="Fiction writer. Debut novella The Man with the Blue Suede Shoes Out Now.">
+  <meta name="twitter:description" content="Fiction writer. Debut novella The Man with the Blue Suede Shoes coming soon.">
 
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-P9EH47TH9Q"></script>
   <script>
@@ -563,6 +563,16 @@
       opacity: 0.6;
     }
 
+    #form-success {
+      display: none;
+      font-family: var(--sans);
+      font-size: 0.7rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--lilac);
+      padding: 1rem 0;
+    }
+
     /* ── FOOTER ── */
     footer {
       border-top: 1px solid rgba(155,145,181,0.1);
@@ -684,11 +694,10 @@
             <img src="TMWTBSS.png" alt="The Man with the Blue Suede Shoes cover">
           </div>
           <div class="work-info">
-            <p class="work-status">Out Now</p>
+            <p class="work-status">Fall 2026</p>
             <h3 class="work-title">The Man with the Blue Suede Shoes</h3>
             <p class="work-type">Novella</p>
-            <p class="work-synopsis">Elvis Presley has left the building. Now Cal Chance has 16 days to find him.</p>
-            <a href="https://www.amazon.com/dp/B0H12KG747" class="btn-primary" style="margin-top: 1rem;">Order from Amazon</a>
+            <p class="work-synopsis">Cal Chance has a talent for finding things people would rather stayed lost. His latest case: a missing Elvis impersonator, a society wedding, and a mystery that keeps getting stranger.</p>
           </div>
         </div>
       </div>
@@ -714,7 +723,7 @@
           <span>Coming Soon</span>
           </div>
           <div class="work-info">
-            <p class="work-status">January 2027</p>
+            <p class="work-status">Forthcoming</p>
             <h3 class="work-title">The Ghost of Elvis Presley</h3>
             <p class="work-type">Duplicate this card as needed</p>
             <p class="work-synopsis">Cal Chance is looking for Elvis Presley. But in the deserts that surround Clark County he instead finds a ghost from the past, a link to the Chinese Mafia, and more questions than answers.</p>
@@ -727,7 +736,22 @@
 
   <div class="divider"></div>
 
- <iframe src="https://davebaylis.substack.com/embed" width="480" height="320" style="border: 1px solid #EEE; background: white" frameborder="0" scrolling="no"></iframe>
+  <!-- CONTACT + MAILING LIST -->
+  <div class="list-section" id="contact">
+    <div class="list-inner">
+      <div class="section-header" style="justify-content:center; margin-bottom:1.8rem;">
+        <span class="section-label">Stay close</span>
+      </div>
+<h2 class="fade">Join the newsletter for a free Cal Chance story.</h2>
+<p class="fade d1">Infrequent. Worth reading. No spam.</p>
+      <form class="email-form fade d2" id="signup-form" onsubmit="handleSignup(event)">
+        <input type="email" name="email" id="bd-email" placeholder="your@email.com" required autocomplete="email">
+        <button type="submit">Subscribe</button>
+      </form>
+      <p class="form-note fade d3">No spam. Unsubscribe any time.</p>
+      <div id="form-success">You're on the list — thank you.</div>
+    </div>
+  </div>
 
   <!-- FOOTER -->
   <footer>
@@ -740,8 +764,19 @@
       entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
     }, { threshold: 0.1, rootMargin: '0px 0px -30px 0px' });
     document.querySelectorAll('.fade').forEach(el => observer.observe(el));
-  </script>
 
-</body>
-</html>
+    function handleSignup(e) {
+      e.preventDefault();
+      const email = document.getElementById('bd-email').value;
+      fetch('https://buttondown.com/api/emails/embed-subscribe/davebaylis', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: `email=${encodeURIComponent(email)}`
+      }).then(() => {
+        document.getElementById('signup-form').style.display = 'none';
+        document.getElementById('form-success').style.display = 'block';
+        if (typeof gtag !== 'undefined') {
+          gtag('event', 'sign_up', { method: 'email_form' });
+        }
+      });
 
