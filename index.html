@@ -59,17 +59,17 @@ header .wrap{display:flex;justify-content:space-between;align-items:center;heigh
 nav a{color:var(--ink);text-decoration:none;margin-left:24px;font-size:.78rem}
 nav a:hover{color:var(--accent)}
 
-/* Hero: photo | name | new book */
-.hero{padding:80px 0 110px;background:linear-gradient(to bottom,var(--sand) 0 calc(100% - 56px),var(--dune) calc(100% - 56px) 100%);border-bottom:2px solid var(--ink)}
+/* Hero: photo | name | new book. The colour change sits just under the name (set by the script at the bottom). */
+.hero{padding:80px 0 90px;background:linear-gradient(to bottom,var(--sand) 0 var(--band,60%),var(--dune) var(--band,60%) 100%);border-bottom:2px solid var(--ink)}
 .hero-grid{display:grid;grid-template-columns:300px 1fr 320px;gap:64px;align-items:center}
 .hero-photo img{border:2px solid var(--ink);box-shadow:12px 12px 0 var(--sage)}
-.hero h1{font-size:clamp(3rem,6.4vw,6.8rem);margin:12px 0 22px}
+.hero h1{font-size:clamp(3rem,6.4vw,6.8rem);margin:12px 0 26px}
 .hero .tag{font-size:1.3rem;max-width:34ch}
 .hero .pull{margin-top:22px;padding-left:16px;border-left:4px solid var(--accent);font-style:italic;color:var(--muted);font-size:1.05rem}
 .hero .cta{margin-top:30px;display:flex;gap:12px;flex-wrap:wrap}
 .feature{text-align:center}
 .cover-wrap{position:relative;display:inline-block}
-.cover-wrap img{width:280px;transform:rotate(2deg);box-shadow:12px 16px 0 var(--dune),0 22px 40px rgba(42,31,26,.25)}
+.cover-wrap img{width:280px;transform:rotate(2deg);box-shadow:12px 16px 0 var(--sand),0 22px 40px rgba(42,31,26,.25)}
 .badge{position:absolute;z-index:2;top:40%;right:-40px;width:86px;height:86px;border-radius:50%;background:var(--sage);color:var(--sand);display:grid;place-items:center;text-align:center;font:700 .7rem/1.2 var(--label);letter-spacing:.12em;text-transform:uppercase;transform:rotate(-10deg);box-shadow:0 6px 14px rgba(0,0,0,.2)}
 .feature .caption{margin-top:28px}
 .feature h3{font-size:2rem}
@@ -132,7 +132,7 @@ footer .mail{color:var(--muted)}
   .books{grid-template-columns:1fr}
 }
 @media (max-width:820px){
-  .hero{padding:40px 0 96px}
+  .hero{padding:40px 0 64px}
   .hero-grid,.about-grid{grid-template-columns:1fr;gap:40px}
   .hero-photo img{max-width:180px}
   .about-grid img{max-width:280px}
@@ -260,7 +260,7 @@ footer .mail{color:var(--muted)}
 <!-- ABOUT -->
 <section id="about" class="about">
   <div class="wrap about-grid">
-    <img src="Dave_Vegas.jpg" alt="David M. Baylis in Las Vegas">
+    <img src="Vegas 1.jpg" alt="David M. Baylis in Las Vegas">
     <div>
       <p class="eyebrow">About</p>
       <h2>Beyond the neon</h2>
@@ -310,6 +310,18 @@ footer .mail{color:var(--muted)}
 </footer>
 
 <script>
+  // Put the hero colour change just under the name, on any screen size
+  function setHeroBand() {
+    var hero = document.querySelector('.hero');
+    var name = hero.querySelector('h1');
+    var y = name.getBoundingClientRect().bottom - hero.getBoundingClientRect().top + 13;
+    hero.style.setProperty('--band', y + 'px');
+  }
+  setHeroBand();
+  window.addEventListener('load', setHeroBand);
+  window.addEventListener('resize', setHeroBand);
+  if (document.fonts) { document.fonts.ready.then(setHeroBand); }
+
   function ml_webform_success_43485109() {
     document.querySelector('#mlb2-43485109 .row-form').style.display = 'none';
     document.getElementById('form-success').style.display = 'block';
