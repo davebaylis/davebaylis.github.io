@@ -70,12 +70,81 @@
 }
 </script>
 
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-P9EH47TH9Q"></script>
+<!-- Cookie consent + Google Analytics -->
+<style>
+#cookie-banner{position:fixed;left:16px;right:16px;bottom:16px;max-width:560px;margin:0 auto;background:#2a1f1a;color:#f4e8d6;padding:18px 20px;border-radius:6px;font:15px/1.5 'Source Serif 4',Georgia,serif;z-index:1000;box-shadow:0 6px 24px rgba(0,0,0,.25);display:none}
+#cookie-banner p{margin:0 0 12px}
+#cookie-banner a{color:#f4e8d6;text-decoration:underline}
+#cookie-banner .cb-buttons{display:flex;gap:10px;flex-wrap:wrap}
+#cookie-banner button{font:700 .75rem 'Archivo',Arial,sans-serif;text-transform:uppercase;letter-spacing:.12em;padding:10px 16px;border:2px solid #f4e8d6;border-radius:4px;cursor:pointer}
+#cb-accept{background:#b5522b;border-color:#b5522b;color:#fff}
+#cb-decline{background:transparent;color:#f4e8d6}
+</style>
 <script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'G-P9EH47TH9Q');
+(function(){
+  var GA_ID = 'G-P9EH47TH9Q';
+  var KEY = 'cookie-consent';
+
+  function getChoice(){ try { return localStorage.getItem(KEY); } catch(e){ return null; } }
+  function setChoice(v){ try { localStorage.setItem(KEY, v); } catch(e){} }
+
+  function loadGA(){
+    if (window.__gaLoaded) return;
+    window.__gaLoaded = true;
+    var s = document.createElement('script');
+    s.async = true;
+    s.src = 'https://www.googletagmanager.com/gtag/js?id=' + GA_ID;
+    document.head.appendChild(s);
+    window.dataLayer = window.dataLayer || [];
+    window.gtag = function(){ dataLayer.push(arguments); };
+    gtag('js', new Date());
+    gtag('config', GA_ID);
+  }
+
+  function clearGACookies(){
+    var host = location.hostname.replace(/^www\./, '');
+    document.cookie.split(';').forEach(function(c){
+      var name = c.split('=')[0].trim();
+      if (name.indexOf('_ga') === 0) {
+        ['', '; domain=' + host, '; domain=.' + host].forEach(function(d){
+          document.cookie = name + '=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/' + d;
+        });
+      }
+    });
+  }
+
+  function buildBanner(){
+    if (document.getElementById('cookie-banner')) return;
+    var b = document.createElement('div');
+    b.id = 'cookie-banner';
+    b.setAttribute('role', 'dialog');
+    b.setAttribute('aria-label', 'Cookie choice');
+    b.innerHTML =
+      '<p>I use Google Analytics to see how many people visit and which pages they read. It only runs if you say yes. <a href="/privacy/">Privacy &amp; cookies</a></p>' +
+      '<div class="cb-buttons"><button id="cb-accept" type="button">Accept</button><button id="cb-decline" type="button">Decline</button></div>';
+    document.body.appendChild(b);
+    document.getElementById('cb-accept').onclick = function(){
+      setChoice('accepted'); b.style.display = 'none'; loadGA();
+    };
+    document.getElementById('cb-decline').onclick = function(){
+      var wasAccepted = getChoice() === 'accepted';
+      setChoice('declined'); b.style.display = 'none'; clearGACookies();
+      if (wasAccepted) location.reload();
+    };
+  }
+
+  window.openCookieSettings = function(){
+    buildBanner();
+    document.getElementById('cookie-banner').style.display = 'block';
+  };
+
+  if (getChoice() === 'accepted') loadGA();
+
+  document.addEventListener('DOMContentLoaded', function(){
+    buildBanner();
+    if (!getChoice()) document.getElementById('cookie-banner').style.display = 'block';
+  });
+})();
 </script>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -172,6 +241,7 @@ cite{display:block;margin-top:14px;font-style:normal;font-size:.7rem;color:#c4b2
 .signup .btn:hover{background:#000}
 .row-success{display:none;font:700 .85rem var(--label);letter-spacing:.14em;text-transform:uppercase;padding:14px 0}
 .small{font-size:.85rem;opacity:.85;margin-top:16px}
+.signup .small a{color:#fff}
 
 /* Footer */
 footer{padding:36px 0;font-size:.9rem;color:var(--muted)}
@@ -348,13 +418,13 @@ footer .mail{color:var(--muted)}
       <div class="row-success" id="form-success">Done. The chapters are on their way. Cal Chance will raise a glass.</div>
     </div>
 
-    <p class="small">No spam. Unsubscribe any time.</p>
+    <p class="small">No spam. Unsubscribe any time. <a href="/privacy/">Privacy notice</a>.</p>
   </div>
 </section>
 
 <footer>
   <div class="wrap">
-    <div>© 2026 David M. Baylis · <a class="mail" href="mailto:author@davebaylis.com">author@davebaylis.com</a></div>
+    <div>© 2026 David M. Baylis · <a class="mail" href="mailto:author@davebaylis.com">author@davebaylis.com</a> · <a class="mail" href="/privacy/">Privacy</a> · <a class="mail" href="#" onclick="openCookieSettings();return false;">Cookie settings</a></div>
     <div class="social">
       <a href="https://www.tiktok.com/@penofbaylis">TikTok</a>
       <a href="#">Facebook</a>
