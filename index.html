@@ -247,6 +247,11 @@ cite{display:block;margin-top:14px;font-style:normal;font-size:.7rem;color:#c4b2
 .small{font-size:.85rem;opacity:.85;margin-top:16px}
 .signup .small a{color:#fff}
 
+/* Giveaway */
+.giveaway{background:rgba(42,31,26,.35);border:2px solid #fff;max-width:52ch;margin:0 auto 26px;padding:14px 20px}
+.giveaway strong{font-family:var(--label);text-transform:uppercase;letter-spacing:.12em;font-size:.8rem;display:block;margin-bottom:4px}
+.giveaway a{color:#fff}
+
 /* Footer */
 footer{padding:36px 0;font-size:.9rem;color:var(--muted)}
 footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:16px}
@@ -312,12 +317,12 @@ footer .mail{color:var(--muted)}
     <div class="feature">
       <div class="cover-wrap">
         <img src="Face Value Cover.png" alt="Face Value by David M. Baylis — cover">
-        <div class="badge">New<br>10 Nov</div>
+        <div class="badge">Out<br>now</div>
       </div>
       <div class="caption">
         <h3>Face Value</h3>
         <p>A casino says Todd owes them $100,000. Cal Chance is the only person who can help. That’s what worries him.</p>
-        <a class="btn" href="https://www.amazon.com/dp/B0HKJVJP75">Pre-order on Amazon</a>
+        <a class="btn" href="https://www.amazon.com/dp/B0HKJVJP75">Buy on Amazon</a>
       </div>
     </div>
   </div>
@@ -353,11 +358,11 @@ footer .mail{color:var(--muted)}
       <article class="book">
         <img src="Face Value Cover.png" alt="Face Value — cover">
         <div>
-          <p class="status">Pre-order · 10 November 2026</p>
+          <p class="status">Out now</p>
           <h3>Face Value</h3>
           <span class="meta-label">A Cal Chance Encounter · Standalone</span>
           <p>Cal blackmailed Todd Bailey once. It worked out fine for Cal. Less so for Todd. Now Todd needs help, and Cal is the last person he’d trust. No prior books required.</p>
-          <a class="btn" href="https://www.amazon.com/dp/B0HKJVJP75">Pre-order on Amazon</a>
+          <a class="btn" href="https://www.amazon.com/dp/B0HKJVJP75">Buy on Amazon</a>
         </div>
       </article>
 
@@ -409,6 +414,12 @@ footer .mail{color:var(--muted)}
     <h2>Read Book 2 before anyone else</h2>
     <p>Sign up and the first two chapters of <em>The Ghost of Elvis Presley</em> land in your inbox, months before release. After that: new Cal Chance releases, extras, and the occasional bad decision.</p>
 
+    <p class="giveaway" id="giveaway">
+      <strong>Until 10 December</strong>
+      Everyone who signs up goes into a draw for one of three free audiobooks. Three winners. Better odds than anything on the Strip.
+      <a href="/giveaway-terms/">Terms</a>
+    </p>
+
     <div id="mlb2-43485109" class="ml-form-embedContainer ml-subscribe-form ml-subscribe-form-43485109">
       <div class="row-form">
         <form class="ml-block-form" action="https://assets.mailerlite.com/jsonp/2495728/forms/192353232729671114/subscribe" data-code="" method="post" target="_blank">
@@ -451,6 +462,17 @@ footer .mail{color:var(--muted)}
   }
 </script>
 <script src="https://groot.mailerlite.com/js/w/webforms.min.js?v83147fa8ce2d95cb73ece7f28b469519" type="text/javascript"></script>
+
+<script>
+  // Hide the audiobook giveaway once the draw closes (end of 10 December)
+  (function(){
+    var end = new Date('2026-12-11T00:00:00Z');
+    if (new Date() >= end) {
+      var g = document.getElementById('giveaway');
+      if (g) g.style.display = 'none';
+    }
+  })();
+</script>
 
 </body>
 </html>
