@@ -415,9 +415,8 @@ footer .mail{color:var(--muted)}
     <p>Sign up and the first two chapters of <em>The Ghost of Elvis Presley</em> land in your inbox, months before release. After that: new Cal Chance releases, extras, and the occasional bad decision.</p>
 
     <p class="giveaway" id="giveaway">
-      <strong>Until 10 December</strong>
-      Everyone who signs up goes into a draw for one of three free audiobooks. Three winners. Better odds than anything on the Strip.
-      <a href="/giveaway-terms/">Terms</a>
+      <strong>Until 25 December</strong>
+      Everyone who signs up goes into a draw for one of three free audiobooks, drawn 1 January. Three winners. Better odds than anything on the Strip. Cal Chance doesn’t do Christmas. He’s doing this one.      <a href="/giveaway-terms/">Terms</a>
     </p>
 
     <div id="mlb2-43485109" class="ml-form-embedContainer ml-subscribe-form ml-subscribe-form-43485109">
@@ -464,11 +463,10 @@ footer .mail{color:var(--muted)}
 <script src="https://groot.mailerlite.com/js/w/webforms.min.js?v83147fa8ce2d95cb73ece7f28b469519" type="text/javascript"></script>
 
 <script>
-  // Hide the audiobook giveaway once the draw closes (end of 10 December)
+  // Hide the audiobook giveaway once the draw closes (end of 25 December)
   (function(){
     var end = new Date('2026-12-11T00:00:00Z');
-    if (new Date() >= end) {
-      var g = document.getElementById('giveaway');
+    var end = new Date('2026-12-26T00:00:00Z');      var g = document.getElementById('giveaway');
       if (g) g.style.display = 'none';
     }
   })();
